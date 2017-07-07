@@ -39,7 +39,7 @@ public class DeathStarWireMockTest {
        RestTemplate restTemplate = new RestTemplate();
 
         response = restTemplate.getForEntity("http://localhost:8089/__admin", String.class);
-       // assertThat("Verify Response Body", response.getBody(), containsString().contains("mappings"));
+        assertThat("Verify Response Body", response.getBody().toString().contains("mappings"));
         assertThat("Verify Status Code", response.getStatusCode().equals(HttpStatus.OK));
 
     }
@@ -54,8 +54,9 @@ public class DeathStarWireMockTest {
                                         .withBody("test")));
 
         response = restTemplate.getForEntity("http://localhost:8089/api/resource/", String.class);
-       // assertThat("Verify Response Body", response.getBody().contains("test"));
+        assertThat("Verify Response Body", response.getBody().toString().contains("test"));
         assertThat("Verify Status Code", response.getStatusCode().equals(HttpStatus.OK));
+
 
         verify(getRequestedFor(urlMatching("/api/resource/.*")));
     }
